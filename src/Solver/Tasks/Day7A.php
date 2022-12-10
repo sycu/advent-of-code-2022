@@ -11,15 +11,11 @@ class Day7A extends AbstractTask
     protected function solve(array $lines): string
     {
         $dirs = $this->buildDirs($lines);
-        $dirs = array_filter($dirs, fn ($d) => $d <= 100000);
+        $dirs = array_filter($dirs, fn (int $d) => $d <= 100000);
 
         return (string) array_sum($dirs);
     }
 
-    /**
-     * @param string[] $lines
-     * @return array<string, int>
-     */
     protected function buildDirs(array $lines): array
     {
         $dirs = [];

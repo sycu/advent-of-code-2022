@@ -6,6 +6,8 @@ namespace Solver;
 
 abstract class AbstractTask
 {
+    private const DATA_DIRECTORY_PATTERN = '%s/tasks/%s';
+
     /**
      * @param string[] $lines
      */
@@ -23,6 +25,6 @@ abstract class AbstractTask
 
     public function dataDirectory(): string
     {
-        return dirname(__FILE__, 3) . "/tasks/{$this->key()}";
+        return sprintf(self::DATA_DIRECTORY_PATTERN, dirname(__FILE__, 3), $this->key());
     }
 }
