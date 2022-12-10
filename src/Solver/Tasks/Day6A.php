@@ -15,19 +15,15 @@ class Day6A extends AbstractTask
 
     protected function solveForLength(array $lines, int $l): string
     {
-        $R = [];
         foreach ($lines as $line) {
             for ($i = 0; $i < strlen($line); $i++) {
                 $part = substr($line, $i, $l);
                 $cc = count_chars($part, 1);
 
                 if (count($cc) === $l) {
-                    $R[] = $i + $l;
-                    break;
+                    return (string) ($i + $l);
                 }
             }
         }
-
-        return implode(' ', $R);
     }
 }

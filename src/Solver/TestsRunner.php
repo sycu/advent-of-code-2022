@@ -36,7 +36,7 @@ class TestsRunner
                 $this->output->write('.');
             } else {
                 $this->output->write('F');
-                $failures[] = "Test case {$number} failed: expected {$expected}, got: {$output}";
+                $failures[] = "Test case {$number} failed: expected {$expected}, got {$output}";
             }
         }
 
