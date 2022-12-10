@@ -1,0 +1,48 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Solver\Tasks;
+
+use Solver\AbstractTask;
+
+class Day8B extends AbstractTask
+{
+    protected function solve(array $lines): string
+    {
+        $grid = array_map(fn (string $line) => str_split($line), $lines);
+        $distances = [];
+
+        for ($y = 0; $y < count($grid); $y++) {
+            for ($x = 0; $x < count($grid[$y]); $x++) {
+                $distances[] = $this->visibleRange($grid, $x, $y, 1, 0)
+                    * $this->visibleRange($grid, $x, $y, -1, 0)
+                    * $this->visibleRange($grid, $x, $y, 0, 1)
+                    * $this->visibleRange($grid, $x, $y, 0, -1);
+            }
+        }
+
+        return (string) max($distances);
+    }
+
+    private function visibleRange(array $A, int $x, int $y, int $dx, int $dy): int
+    {
+        $size = $A[$y][$x];
+
+        $sum = 0;
+        while (true) {
+            $x += $dx;
+            $y += $dy;
+
+            if (!isset($A[$y][$x])) {
+                return $sum;
+            }
+
+            $sum++;
+
+            if ($A[$y][$x] >= $size) {
+                return $sum;
+            }
+        }
+    }
+}
