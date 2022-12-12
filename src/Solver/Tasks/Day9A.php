@@ -13,12 +13,11 @@ class Day9A extends AbstractTask
         return $this->solveForKnots($lines, 2);
     }
 
-    protected function solveForKnots(array $lines, int $k): string
+    protected function solveForKnots(array $lines, int $knots): string
     {
-        $P = array_fill(0, $k, [0, 0]);
-
-        $V = [];
-        $D = [
+        $rope = array_fill(0, $knots, [0, 0]);
+        $visited = [];
+        $directions = [
             'U' => [0, -1],
             'D' => [0, 1],
             'L' => [-1, 0],
@@ -26,26 +25,26 @@ class Day9A extends AbstractTask
         ];
 
         foreach ($lines as $line) {
-            [$d, $n] = explode(' ', $line);
+            [$direction, $steps] = explode(' ', $line);
 
-            for ($i = 0; $i < $n; $i++) {
-                $P[0][0] += $D[$d][0];
-                $P[0][1] += $D[$d][1];
+            while ($steps--) {
+                $rope[0][0] += $directions[$direction][0];
+                $rope[0][1] += $directions[$direction][1];
 
-                for ($j = 0; $j < $k - 1; $j++) {
-                    $mx = $P[$j][0] - $P[$j + 1][0];
-                    $my = $P[$j][1] - $P[$j + 1][1];
+                for ($j = 0; $j < $knots - 1; $j++) {
+                    $dx = $rope[$j][0] - $rope[$j + 1][0];
+                    $dy = $rope[$j][1] - $rope[$j + 1][1];
 
-                    if (abs($mx) > 1 || abs($my) > 1) {
-                        $P[$j + 1][0] += $mx <=> 0;
-                        $P[$j + 1][1] += $my <=> 0;
+                    if (abs($dx) > 1 || abs($dy) > 1) {
+                        $rope[$j + 1][0] += $dx <=> 0;
+                        $rope[$j + 1][1] += $dy <=> 0;
                     }
                 }
 
-                $V[$P[$k - 1][0] . '-' . $P[$k - 1][1]] = true;
+                $visited[$rope[$knots - 1][0] . '-' . $rope[$knots - 1][1]] = true;
             }
         }
 
-        return (string) count($V);
+        return (string) count($visited);
     }
 }

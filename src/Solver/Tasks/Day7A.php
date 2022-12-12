@@ -11,7 +11,7 @@ class Day7A extends AbstractTask
     protected function solve(array $lines): string
     {
         $dirs = $this->buildDirs($lines);
-        $dirs = array_filter($dirs, fn (int $d) => $d <= 100000);
+        $dirs = array_filter($dirs, fn (int $dir) => $dir <= 100000);
 
         return (string) array_sum($dirs);
     }
@@ -19,17 +19,17 @@ class Day7A extends AbstractTask
     protected function buildDirs(array $lines): array
     {
         $dirs = [];
-        $path = [];
+        $paths = [];
         foreach ($lines as $line) {
             if ($line === '$ cd ..') {
-                array_pop($path);
-            } elseif (preg_match('/^\$ cd (.+)$/', $line, $M)) {
-                $path[] = $M[1];
-            } elseif (preg_match('/^(\d+) (.+)$/', $line, $M)) {
-                $P = $path;
+                array_pop($paths);
+            } elseif (preg_match('/^\$ cd (.+)$/', $line, $matches)) {
+                $paths[] = $matches[1];
+            } elseif (preg_match('/^(\d+) (.+)$/', $line, $matches)) {
+                $P = $paths;
                 while ($P) {
-                    $p = implode('-', $P);
-                    $dirs[$p] = ($dirs[$p] ?? 0) + (int) $M[1];
+                    $slug = implode('-', $P);
+                    $dirs[$slug] = ($dirs[$slug] ?? 0) + (int) $matches[1];
                     array_pop($P);
                 }
             }

@@ -25,19 +25,19 @@ class Day8A extends AbstractTask
         return (string) $sum;
     }
 
-    private function isVisible(array $A, int $x, int $y, int $dx, int $dy): bool
+    private function isVisible(array $grid, int $x, int $y, int $dx, int $dy): bool
     {
-        $size = $A[$y][$x];
+        $size = $grid[$y][$x];
 
         while (true) {
             $x += $dx;
             $y += $dy;
 
-            if (!isset($A[$y][$x])) {
+            if (!isset($grid[$y][$x])) {
                 return true;
             }
 
-            if ($A[$y][$x] >= $size) {
+            if ($grid[$y][$x] >= $size) {
                 return false;
             }
         }

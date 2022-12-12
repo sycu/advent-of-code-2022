@@ -36,7 +36,12 @@ class TestsRunner
                 $this->output->write('.');
             } else {
                 $this->output->write('F');
-                $failures[] = "Test case {$number} failed: expected {$expected}, got {$output}";
+                $failures[] = sprintf(
+                    'Test case %d failed: expected %s got %s',
+                    $number,
+                    $this->formatOutput($expected),
+                    $this->formatOutput($output)
+                );
             }
         }
 
@@ -57,15 +62,24 @@ class TestsRunner
         }
 
         $solution = $task->solveForInputFile(sprintf(self::INPUT_PATTERN, $task->dataDirectory()));
-        $this->output->write("Solution is {$solution}");
+        $this->output->write("Solution is {$this->formatOutput($solution)}");
         if ($failures) {
-            $this->output->write(', but is probably wrong');
+            $this->output->write(' but is probably wrong');
         }
 
         $this->output->writeln('');
         foreach ($failures as $failure) {
             $this->output->writeln("  {$failure}");
         }
+    }
+
+    private function formatOutput(string $output): string
+    {
+        if (str_contains($output, PHP_EOL)) {
+            return PHP_EOL . $output;
+        }
+
+        return $output;
     }
 
     private function testExists(AbstractTask $task, int $number): bool

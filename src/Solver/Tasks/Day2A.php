@@ -12,16 +12,16 @@ class Day2A extends AbstractTask
     {
         $score = 0;
         foreach ($lines as $line) {
-            [$p, $q] = explode(' ', trim($line));
+            [$opponent, $player] = explode(' ', trim($line));
 
-            $P = [
+            $pointsMap = [
                 'A' => ['X' => 3, 'Y' => 6, 'Z' => 0],
                 'B' => ['X' => 0, 'Y' => 3, 'Z' => 6],
                 'C' => ['X' => 6, 'Y' => 0, 'Z' => 3],
             ];
 
-            $score += $P[$p][$q];
-            $score += ['X' => 1, 'Y' => 2, 'Z' => 3][$q];
+            $score += $pointsMap[$opponent][$player];
+            $score += ['X' => 1, 'Y' => 2, 'Z' => 3][$player];
         }
 
         return (string) $score;

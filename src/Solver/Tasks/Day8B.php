@@ -25,22 +25,22 @@ class Day8B extends AbstractTask
         return (string) max($distances);
     }
 
-    private function visibleRange(array $A, int $x, int $y, int $dx, int $dy): int
+    private function visibleRange(array $grid, int $x, int $y, int $dx, int $dy): int
     {
-        $size = $A[$y][$x];
+        $size = $grid[$y][$x];
 
         $sum = 0;
         while (true) {
             $x += $dx;
             $y += $dy;
 
-            if (!isset($A[$y][$x])) {
+            if (!isset($grid[$y][$x])) {
                 return $sum;
             }
 
             $sum++;
 
-            if ($A[$y][$x] >= $size) {
+            if ($grid[$y][$x] >= $size) {
                 return $sum;
             }
         }
