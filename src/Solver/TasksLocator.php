@@ -7,7 +7,7 @@ namespace Solver;
 class TasksLocator
 {
     /**
-     * @return AbstractTask[]
+     * @return Task[]
      */
     public function find(string $filter): array
     {

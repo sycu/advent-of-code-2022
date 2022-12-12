@@ -15,7 +15,7 @@ class TestsRunner
     {
     }
 
-    public function run(AbstractTask $task): void
+    public function run(Task $task): void
     {
         $failures = $this->runTestsAndGetFailures($task);
         $this->printSolutionAndFailures($task, $failures);
@@ -24,7 +24,7 @@ class TestsRunner
     /**
      * @return string[]
      */
-    private function runTestsAndGetFailures(AbstractTask $task): array
+    private function runTestsAndGetFailures(Task $task): array
     {
         $this->output->write("{$task->key()}:\t");
         $failures = [];
@@ -53,7 +53,7 @@ class TestsRunner
     /**
      * @param string[] $failures
      */
-    private function printSolutionAndFailures(AbstractTask $task, array $failures): void
+    private function printSolutionAndFailures(Task $task, array $failures): void
     {
         if (!file_exists(sprintf(self::INPUT_PATTERN, $task->dataDirectory()))) {
             $this->output->writeln('Missing input file');
@@ -82,7 +82,7 @@ class TestsRunner
         return $output;
     }
 
-    private function testExists(AbstractTask $task, int $number): bool
+    private function testExists(Task $task, int $number): bool
     {
         return file_exists(sprintf(self::TEST_INPUT_PATTERN, $task->dataDirectory(), $number))
             && file_exists(sprintf(self::TEST_OUTPUT_PATTERN, $task->dataDirectory(), $number));

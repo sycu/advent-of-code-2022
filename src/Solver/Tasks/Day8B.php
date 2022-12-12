@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Solver\Tasks;
 
-use Solver\AbstractTask;
+use Solver\Task;
 
-class Day8B extends AbstractTask
+class Day8B extends Task
 {
     protected function solve(array $lines): string
     {

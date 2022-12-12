@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Solver\Tasks;
 
-use Solver\AbstractTask;
+use Solver\Task;
 
-class Day2B extends AbstractTask
+class Day2B extends Task
 {
     protected function solve(array $lines): string
     {
@@ -26,10 +26,10 @@ class Day2B extends AbstractTask
                 'C' => ['X' => 'Y', 'Y' => 'Z', 'Z' => 'X'],
             ];
 
-            $player = $resultsMap[$opponent][$result];
+            $move = $resultsMap[$opponent][$result];
 
-            $score += $pointsMap[$opponent][$player];
-            $score += ['X' => 1, 'Y' => 2, 'Z' => 3][$player];
+            $score += $pointsMap[$opponent][$move];
+            $score += ['X' => 1, 'Y' => 2, 'Z' => 3][$move];
         }
 
         return (string) $score;

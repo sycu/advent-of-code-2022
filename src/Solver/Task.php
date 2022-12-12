@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Solver;
 
-abstract class AbstractTask
+abstract class Task
 {
     private const DATA_DIRECTORY_PATTERN = '%s/tasks/%s';
 
