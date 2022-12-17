@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Solver;
 
+use ReflectionClass;
+
 abstract class Task
 {
     private const DATA_DIRECTORY_PATTERN = '%s/tasks/%s';
@@ -20,7 +22,7 @@ abstract class Task
 
     public function key(): string
     {
-        return (new \ReflectionClass($this))->getShortName();
+        return (new ReflectionClass($this))->getShortName();
     }
 
     public function dataDirectory(): string

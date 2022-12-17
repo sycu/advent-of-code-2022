@@ -23,6 +23,7 @@ class TaskGenerator
         copy("{$templatesPath}/test1.input.txt", "{$dataDestination}/test1.input.txt");
         copy("{$templatesPath}/test1.output.txt", "{$dataDestination}/test1.output.txt");
         copy("{$templatesPath}/input.txt", "{$dataDestination}/input.txt");
+        copy("{$templatesPath}/output.txt", "{$dataDestination}/output.txt");
 
         $taskTemplate = file_get_contents("{$templatesPath}/Task.php.template");
         $taskContent = strtr($taskTemplate, ['[KEY]' => $key]);

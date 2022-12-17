@@ -8,6 +8,7 @@ class TestsRunner
 {
     private const PROGRESS_LENGTH = 10;
     private const INPUT_PATTERN = '%s/input.txt';
+    private const OUTPUT_PATTERN = '%s/output.txt';
     private const TEST_INPUT_PATTERN = '%s/test%d.input.txt';
     private const TEST_OUTPUT_PATTERN = '%s/test%d.output.txt';
 
@@ -62,9 +63,15 @@ class TestsRunner
         }
 
         $solution = $task->solveForInputFile(sprintf(self::INPUT_PATTERN, $task->dataDirectory()));
+        $acceptedSolution = $this->acceptedSolution($task);
+
         $this->output->write("Solution is {$this->formatOutput($solution)}");
         if ($failures) {
             $this->output->write(' but is probably wrong');
+        } elseif (!$acceptedSolution) {
+            $this->output->write(' and is not accepted yet');
+        } elseif($solution !== $acceptedSolution) {
+            $this->output->write(" but it does not match accepted solution {$this->formatOutput($acceptedSolution)}");
         }
 
         $this->output->writeln('');
@@ -86,5 +93,15 @@ class TestsRunner
     {
         return file_exists(sprintf(self::TEST_INPUT_PATTERN, $task->dataDirectory(), $number))
             && file_exists(sprintf(self::TEST_OUTPUT_PATTERN, $task->dataDirectory(), $number));
+    }
+
+    private function acceptedSolution(Task $task): ?string
+    {
+        $acceptedSolutionPath = sprintf(self::OUTPUT_PATTERN, $task->dataDirectory());
+        if (!file_exists($acceptedSolutionPath)) {
+            return null;
+        }
+
+        return rtrim(file_get_contents($acceptedSolutionPath));
     }
 }
