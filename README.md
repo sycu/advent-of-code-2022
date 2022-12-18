@@ -20,7 +20,7 @@ php solve.php "Day[0-9]{1,2}B"
 ```
 
 Example output:
-```bash
+```
 $ php solve.php "Day([5-9]|10|11)"
 
 Day5A:	.         Solved in 0.000s: FJSRQCFTN
