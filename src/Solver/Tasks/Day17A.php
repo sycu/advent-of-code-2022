@@ -13,12 +13,12 @@ class Day17A extends Task
     protected function solve(array $lines): string
     {
         $wind = $lines[0];
-        [$map] = $this->generateMap(2022, $wind);
+        [$map] = $this->generateMapAndHeights(2022, $wind);
 
         return (string) count($map);
     }
 
-    protected function generateMap(int $iterations, string $wind): array
+    protected function generateMapAndHeights(int $iterations, string $wind): array
     {
         $blocks = [
             [
@@ -54,10 +54,8 @@ class Day17A extends Task
             $block = $blocks[$b++ % count($blocks)];
             $heights[$i] = count($map);
 
-            $height = count($map) + count($block) + 3;
-
             $x = 2;
-            $y = $height - 1;
+            $y = count($map) + count($block) + 2;
 
             $blockPlaced = false;
             while (!$blockPlaced) {
