@@ -71,7 +71,9 @@ class Day18B extends Task
                 for ($z = $minZ + 1; $z < $maxZ; $z++) {
                     if (($grid[$x][$y][$z] ?? false) === false) {
                         foreach ($directions as [$dx, $dy, $dz]) {
-                            $sum -= $grid[$x + $dx][$y + $dy][$z + $dz] ?? false;
+                            if ($grid[$x + $dx][$y + $dy][$z + $dz] ?? false) {
+                                $sum--;
+                            }
                         }
                     }
                 }
