@@ -7,17 +7,17 @@ namespace Solver\Tasks;
 class Day17B extends Day17A
 {
     private const TARGET_ITERATIONS = 1000000000000;
-    private const MIN_HEIGHT_TO_FIND_CYCLE = 4; // Minimum cycle, increase it if you have false positives
-    private const ENOUGH_ITERATIONS = 10000; // Increase it if cycle was not found
+    private const ITERATIONS = 10000; // Increase it if cycle was not found
+    private const MIN_CYCLE = 4; // Minimum cycle, increase it if you have false positives
 
     protected function solve(array $lines): string
     {
         $wind = $lines[0];
-        [$map, $heights] = $this->generateMapAndHeights(self::ENOUGH_ITERATIONS, $wind);
+        [$map, $heights] = $this->generateMapAndHeights(self::ITERATIONS, $wind);
 
         $cycleHeight = $this->findCycleHeight($map);
-        $iterationsBeforeCycle = $this->findIterationsToLimit($heights, self::ENOUGH_ITERATIONS - $cycleHeight);
-        $iterationsAfterCycle = $this->findIterationsToLimit($heights, self::ENOUGH_ITERATIONS);
+        $iterationsBeforeCycle = $this->findIterationsToLimit($heights, self::ITERATIONS - $cycleHeight);
+        $iterationsAfterCycle = $this->findIterationsToLimit($heights, self::ITERATIONS);
 
         $iterationsPerCycle = $iterationsAfterCycle - $iterationsBeforeCycle;
         $targetIterationsAfterCycle = self::TARGET_ITERATIONS - $iterationsBeforeCycle;
@@ -39,7 +39,7 @@ class Day17B extends Day17A
 
     private function findCycleHeight(array $map): int
     {
-        for ($i = self::MIN_HEIGHT_TO_FIND_CYCLE; $i < count($map) / 2; $i++) {
+        for ($i = self::MIN_CYCLE; $i < count($map) / 2; $i++) {
             $partA = array_slice($map, -$i, $i);
             $partB = array_slice($map, -2 * $i, $i);
 
