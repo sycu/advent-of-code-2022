@@ -55,7 +55,7 @@ php generate.php KEY
 
 Examples:
 ```shell
-php generate.php Day5A
+php generate.php Day12A
 ```
 
 Files to fill (assuming Day12A is a task key):
