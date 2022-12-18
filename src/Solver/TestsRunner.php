@@ -62,14 +62,16 @@ class TestsRunner
             return;
         }
 
+        $startTime = microtime(true);
         $solution = $task->solveForInputFile(sprintf(self::INPUT_PATTERN, $task->dataDirectory()));
+        $solutionTime = microtime(true) - $startTime;
         $acceptedSolution = $this->acceptedSolution($task);
 
-        $this->output->write("Solution is {$this->formatOutput($solution)}");
+        $this->output->write(sprintf('Solved in %.3fs: %s', $solutionTime, $this->formatOutput($solution)));
         if ($failures) {
             $this->output->write(' but is probably wrong');
         } elseif (!$acceptedSolution) {
-            $this->output->write(' and is not accepted yet');
+            $this->output->write(' but is not accepted yet');
         } elseif($solution !== $acceptedSolution) {
             $this->output->write(" but it does not match accepted solution {$this->formatOutput($acceptedSolution)}");
         }
