@@ -8,7 +8,7 @@ class Day17B extends Day17A
 {
     private const TARGET_ITERATIONS = 1000000000000;
     private const ITERATIONS = 10000; // Increase it if cycle was not found
-    private const MIN_CYCLE = 4; // Minimum cycle, increase it if you have false positives
+    private const MINIMUM_CYCLE = 4; // Increase it if you have false positives
 
     protected function solve(array $lines): string
     {
@@ -39,7 +39,7 @@ class Day17B extends Day17A
 
     private function findCycleHeight(array $map): int
     {
-        for ($i = self::MIN_CYCLE; $i < count($map) / 2; $i++) {
+        for ($i = self::MINIMUM_CYCLE; $i < count($map) / 2; $i++) {
             $partA = array_slice($map, -$i, $i);
             $partB = array_slice($map, -2 * $i, $i);
 
