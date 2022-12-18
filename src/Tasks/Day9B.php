@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tasks;
 
-use Solver\Task;
-
-class [KEY] extends Task
+class Day9B extends Day9A
 {
     protected function solve(array $lines): string
     {
-        return (string) count($lines);
+        return $this->solveForKnots($lines, 10);
     }
 }

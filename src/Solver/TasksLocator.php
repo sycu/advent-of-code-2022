@@ -11,13 +11,13 @@ class TasksLocator
      */
     public function find(string $filter): array
     {
-        $files = scandir(dirname(__FILE__) . '/Tasks');
+        $files = scandir(dirname(__FILE__, 2) . '/Tasks');
         natsort($files);
 
         $tasks = [];
         foreach ($files as $file) {
             if (preg_match("/^(.*{$filter}.*)\.php$/", $file, $matches)) {
-                $tasks[] = new ('\\Solver\\Tasks\\' . $matches[1])();
+                $tasks[] = new ('\\Tasks\\' . $matches[1])();
             }
         }
 

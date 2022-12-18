@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tasks;
 
-use Solver\Task;
-
-class [KEY] extends Task
+class Day11B extends Day11A
 {
     protected function solve(array $lines): string
     {
-        return (string) count($lines);
+        return $this->solveForLimitAndDivisor($lines, 10000, 1);
     }
 }

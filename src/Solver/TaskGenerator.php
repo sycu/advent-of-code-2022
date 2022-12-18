@@ -27,6 +27,6 @@ class TaskGenerator
 
         $taskTemplate = file_get_contents("{$templatesPath}/Task.php.template");
         $taskContent = strtr($taskTemplate, ['[KEY]' => $key]);
-        file_put_contents("{$rootPath}/src/Solver/Tasks/{$key}.php", $taskContent);
+        file_put_contents("{$rootPath}/src/Tasks/{$key}.php", $taskContent);
     }
 }

@@ -46,7 +46,7 @@ Day11B:	.         Solved in 0.954s: 25712998901
 ```
 
 ## Generate new task
-It will create task data in **tasks/** directory, which you should fill out. Actual code template will be located in **src/Solver/Tasks/**
+It will create task data in **tasks/** directory, which you should fill out. Actual code template will be located in **src/Tasks/**
 
 
 ```shell
@@ -58,12 +58,13 @@ Examples:
 php generate.php Day5A
 ```
 
-Files to fill:
+Files to fill (assuming Day12A is a task key):
 
-| File             | Description                                                                                             | Required |
-|------------------|---------------------------------------------------------------------------------------------------------|----------|
-| description.txt  | Task description. It is not used anywhere, just for convenience.                                        | No       |
-| input.txt        | Input for the actual problem.                                                                           | Yes      |
-| output.txt       | Working solution, that you have already submitted. It is used to validate your code during refactoring. | No       |
-| test1.input.txt  | Input for a test case. You can have multiple test cases, just add test2.input.txt and so on.            | No       |
-| test1.output.txt | Output for a test case. Each test input should have a matching output file to be executed.              | No       |
+| File                          | Description                                                                                             | Required |
+|-------------------------------|---------------------------------------------------------------------------------------------------------|----------|
+| src/Tasks/Day12A.php          | Your code for the task. Just implement "**solve**" method for given array of input lines.               | Yes      |
+| tasks/Day12A/description.txt  | Task description. It is not used anywhere, just for convenience.                                        | No       |
+| tasks/Day12A/input.txt        | Input for the actual problem.                                                                           | Yes      |
+| tasks/Day12A/output.txt       | Working solution, that you have already submitted. It is used to validate your code during refactoring. | No       |
+| tasks/Day12A/test1.input.txt  | Input for a test case. You can have multiple test cases, just add test2.input.txt and so on.            | No       |
+| tasks/Day12A/test1.output.txt | Output for a test case. Each test input should have a matching output file to be executed.              | No       |

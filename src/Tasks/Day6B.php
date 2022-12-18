@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Tasks;
 
-use Solver\Task;
-
-class [KEY] extends Task
+class Day6B extends Day6A
 {
     protected function solve(array $lines): string
     {
-        return (string) count($lines);
+        return $this->solveForLength($lines, 14);
     }
 }
