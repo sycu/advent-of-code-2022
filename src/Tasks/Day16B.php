@@ -19,21 +19,18 @@ class Day16B extends Day16A
             $paths = array_merge($paths, $this->generatePathsOfLength($length, 'AA', 26, 0, $rates, $distances, []));
         }
 
-        arsort($paths);
+        rsort($paths);
 
         $sums = [0];
-        foreach ($paths as $a => $profitA) {
-            foreach ($paths as $b => $profitB) {
-                $A = explode(' ', $a);
-                $B = explode(' ', $b);
-
+        foreach ($paths as [$profitA, $pathA]) {
+            foreach ($paths as [$profitB, $pathB]) {
                 $sum = $profitA + $profitB;
 
                 if ($sum < max($sums)) {
                     break;
                 }
 
-                if (array_intersect($A, $B) === []) {
+                if (array_intersect($pathA, $pathB) === []) {
                     $sums[] = $sum;
                 }
             }
@@ -45,7 +42,7 @@ class Day16B extends Day16A
     private function generatePathsOfLength(int $length, string $position, int $limit, int $profit, array $rates, array $distances, array $path): array
     {
         if (!$rates || $length < 1) {
-            return [implode(' ', $path) => $profit];
+            return [[$profit, $path]];
         }
 
         $paths = [];
