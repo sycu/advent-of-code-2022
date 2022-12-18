@@ -8,10 +8,15 @@ use Solver\Task;
 
 class Day16A extends Task
 {
+    /**
+     * Generate all reachable paths and return the most profitable one.
+     * We use only those, which have rate > 0 and use rest as a travel cost.
+     */
     protected function solve(array $lines): string
     {
         [$distances, $rates] = $this->buildDistancesAndRates($lines);
 
+        // Generate all reachable paths and return the best one.
         return (string) $this->maxProfit('AA', 30, $rates, $distances);
     }
 

@@ -13,19 +13,30 @@ class Day17B extends Day17A
     protected function solve(array $lines): string
     {
         $wind = $lines[0];
+
+        // Generate map big enough to have cycles
         [$map, $heights] = $this->generateMapAndHeights(self::ITERATIONS, $wind);
 
+        // Find cycle height (in blocks) and iteration number before and after a cycle
         $cycleHeight = $this->findCycleHeight($map);
         $iterationsBeforeCycle = $this->findIterationsToLimit($heights, self::ITERATIONS - $cycleHeight);
         $iterationsAfterCycle = $this->findIterationsToLimit($heights, self::ITERATIONS);
-
         $iterationsPerCycle = $iterationsAfterCycle - $iterationsBeforeCycle;
+
+        // Find how many cycles are in our target tower
         $targetIterationsAfterCycle = self::TARGET_ITERATIONS - $iterationsBeforeCycle;
         $cyclesNumber = (int) ($targetIterationsAfterCycle / $iterationsPerCycle);
+
+        // Find how many iterations will be left after all the cycles
         $iterationsLeft = $targetIterationsAfterCycle % $iterationsPerCycle;
+
+        // Calculate tower height without cycles
         $heightWithoutCycles = $heights[$iterationsBeforeCycle + $iterationsLeft];
 
-        return (string) ($heightWithoutCycles + $cyclesNumber * $cycleHeight);
+        // Solution is height without cycles + height of all the cycles
+        $height = $heightWithoutCycles + $cyclesNumber * $cycleHeight;
+
+        return (string) $height;
     }
 
     private function findIterationsToLimit(array $heights, int $limit): int

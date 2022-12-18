@@ -6,6 +6,10 @@ namespace Solver\Tasks;
 
 class Day16B extends Day16A
 {
+    /**
+     * Generate all reachable paths of any length greater than 0, then iterate through all pairs of paths and find those
+     * which don't intersect. Most profitable pair is the solution.
+     */
     protected function solve(array $lines): string
     {
         [$distances, $rates] = $this->buildDistancesAndRates($lines);

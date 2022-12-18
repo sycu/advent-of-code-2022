@@ -6,7 +6,7 @@ namespace Solver\Tasks;
 
 class Day14B extends Day14A
 {
-    private const MARGIN = 500;
+    private const MARGIN = 500; // Increase it, if you can't reach the top
 
     protected function solve(array $lines): string
     {

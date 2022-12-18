@@ -9,6 +9,11 @@ class Day15B extends Day15A
     private const LIMIT = 4000000;
     private const MULTIPLIER = 4000000;
 
+    /**
+     * Find 4 lines, which are boundaries of each signal "diamonds" (1 unit away from each side). Because we are looking
+     * for a single point, it means that this point must be an intersection of these lines, but not covered by any
+     * signal.
+     */
     protected function solve(array $lines): string
     {
         $A = $B = $signals = [];

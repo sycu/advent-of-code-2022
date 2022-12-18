@@ -10,6 +10,9 @@ class Day15A extends Task
 {
     private const ROW = 2000000;
 
+    /**
+     * Mark signal coverage for each sensor, but only on the Y level that we are interested in.
+     */
     protected function solve(array $lines): string
     {
         $map = [];
