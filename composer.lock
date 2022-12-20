@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a19c521eb44399c56a856c7d4f238971",
+    "content-hash": "e89822f5c1daaf2005b31d770d9c283c",
     "packages": [
         {
             "name": "sycu/task-solver",
