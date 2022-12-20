@@ -8,20 +8,23 @@
     "packages": [
         {
             "name": "sycu/task-solver-core",
-            "version": "v0.1.4",
+            "version": "v0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sycu/task-solver-core.git",
-                "reference": "f2fd1e820c9ef0daa6887ff48e91834544658f1f"
+                "reference": "4c3b1bb32511b36ee77a485424e58f0516d355c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sycu/task-solver-core/zipball/f2fd1e820c9ef0daa6887ff48e91834544658f1f",
-                "reference": "f2fd1e820c9ef0daa6887ff48e91834544658f1f",
+                "url": "https://api.github.com/repos/sycu/task-solver-core/zipball/4c3b1bb32511b36ee77a485424e58f0516d355c0",
+                "reference": "4c3b1bb32511b36ee77a485424e58f0516d355c0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "autoload": {
@@ -36,11 +39,12 @@
                     "email": "patryk@edefine.pl"
                 }
             ],
+            "description": "PHP Framework for competitive programming",
             "support": {
                 "issues": "https://github.com/sycu/task-solver-core/issues",
-                "source": "https://github.com/sycu/task-solver-core/tree/v0.1.4"
+                "source": "https://github.com/sycu/task-solver-core/tree/v0.1.5"
             },
-            "time": "2022-12-20T19:32:58+00:00"
+            "time": "2022-12-20T22:13:36+00:00"
         }
     ],
     "packages-dev": [],
