@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "sycu/task-solver",
-            "version": "v0.1.1",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sycu/task-solver.git",
-                "reference": "c2274da782d409c566c716c211a91e129e593e64"
+                "reference": "887f44bef1b950702be20d13211428a7835b8de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sycu/task-solver/zipball/c2274da782d409c566c716c211a91e129e593e64",
-                "reference": "c2274da782d409c566c716c211a91e129e593e64",
+                "url": "https://api.github.com/repos/sycu/task-solver/zipball/887f44bef1b950702be20d13211428a7835b8de9",
+                "reference": "887f44bef1b950702be20d13211428a7835b8de9",
                 "shasum": ""
             },
             "require": {
@@ -38,9 +38,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sycu/task-solver/issues",
-                "source": "https://github.com/sycu/task-solver/tree/v0.1.1"
+                "source": "https://github.com/sycu/task-solver/tree/v0.1.2"
             },
-            "time": "2022-12-20T17:20:21+00:00"
+            "time": "2022-12-20T18:02:48+00:00"
         }
     ],
     "packages-dev": [],
