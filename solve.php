@@ -7,8 +7,9 @@ require_once 'vendor/autoload.php';
 $filter = $argv[1] ?? '';
 $solutionsOnly = ($argv[2] ?? '') === 'solutions';
 
-$tasksLocator = new Solver\TasksLocator();
-$testsRunner = new Solver\TestsRunner(new Solver\ConsoleOutput());
+$config = require 'config.php';
+$tasksLocator = new Solver\TasksLocator($config['namespace'], $config['code_directory']);
+$testsRunner = new Solver\TestsRunner($config['data_directory'], new Solver\ConsoleOutput());
 
 foreach ($tasksLocator->find($filter) as $task) {
     $testsRunner->run($task, $solutionsOnly);

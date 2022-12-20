@@ -12,7 +12,8 @@ if (!$key) {
     exit(1);
 }
 
-$generator = new Solver\TaskGenerator();
+$config = require 'config.php';
+$generator = new Solver\TaskGenerator($config['namespace'], $config['code_directory'], $config['data_directory']);
 
 try {
     $generator->generate($key);

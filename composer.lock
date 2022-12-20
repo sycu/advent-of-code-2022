@@ -4,15 +4,54 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71614df40589aacb22b8a5e5d4292b52",
-    "packages": [],
+    "content-hash": "a19c521eb44399c56a856c7d4f238971",
+    "packages": [
+        {
+            "name": "sycu/task-solver",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sycu/task-solver.git",
+                "reference": "c2274da782d409c566c716c211a91e129e593e64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sycu/task-solver/zipball/c2274da782d409c566c716c211a91e129e593e64",
+                "reference": "c2274da782d409c566c716c211a91e129e593e64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Patryk Syc",
+                    "email": "patryk@edefine.pl"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/sycu/task-solver/issues",
+                "source": "https://github.com/sycu/task-solver/tree/v0.1.1"
+            },
+            "time": "2022-12-20T17:20:21+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=8.1"
+    },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
 }
