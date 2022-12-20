@@ -25,7 +25,7 @@ php solve "Day[3-6]B" solutions
 
 Example output:
 ```
-$ php solve.php "Day([5-9]|10|11)"
+$ php solve "Day([5-9]|10|11)"
 
 Day5A:	.         Solved in 0.000s: FJSRQCFTN
 Day5B:	.         Solved in 0.000s: CJVLJQPHS
