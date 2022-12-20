@@ -9,7 +9,7 @@ composer install
 ## Run tests and get solutions
 You can filter tasks by providing **[FILTER]** argument (regexp)
 ```shell
-php solve.php [FILTER] [OPTIONS]
+php solve [FILTER] [OPTIONS]
 ```
 
 Options:
@@ -17,10 +17,10 @@ Options:
 
 Examples:
 ```shell
-php solve.php
-php solve.php Day5
-php solve.php "Day[0-9]{1,2}B"
-php solve.php "Day[3-6]B" solutions
+php solve
+php solve Day5
+php solve "Day[0-9]{1,2}B"
+php solve "Day[3-6]B" solutions
 ```
 
 Example output:
@@ -54,12 +54,12 @@ It will create task data in **tasks/** directory, which you should fill out. Act
 
 
 ```shell
-php generate.php KEY
+php generate KEY
 ```
 
 Examples:
 ```shell
-php generate.php Day12A
+php generate Day12A
 ```
 
 Files to fill (assuming Day12A is a task key):
