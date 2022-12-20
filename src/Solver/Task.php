@@ -8,6 +8,8 @@ use ReflectionClass;
 
 abstract class Task
 {
+    protected const SOLVER_SKIP_TESTS = false;
+
     private const DATA_DIRECTORY_PATTERN = '%s/tasks/%s';
 
     /**
@@ -28,5 +30,10 @@ abstract class Task
     public function dataDirectory(): string
     {
         return sprintf(self::DATA_DIRECTORY_PATTERN, dirname(__FILE__, 3), $this->key());
+    }
+
+    public function skipTests(): bool
+    {
+        return static::SOLVER_SKIP_TESTS;
     }
 }

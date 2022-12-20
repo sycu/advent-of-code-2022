@@ -16,20 +16,25 @@ class TestsRunner
     {
     }
 
-    public function run(Task $task): void
+    public function run(Task $task, bool $solutionOnly): void
     {
-        $failures = $this->runTestsAndGetFailures($task);
+        $failures = $this->runTestsAndGetFailures($task, $solutionOnly);
         $this->printSolutionAndFailures($task, $failures);
     }
 
     /**
      * @return string[]
      */
-    private function runTestsAndGetFailures(Task $task): array
+    private function runTestsAndGetFailures(Task $task, bool $solutionOnly): array
     {
         $this->output->write("{$task->key()}:\t");
         $failures = [];
         for ($number = 1; $this->testExists($task, $number); $number++) {
+            if ($solutionOnly || $task->skipTests()) {
+                $this->output->write('S');
+                continue;
+            }
+
             $output = $task->solveForInputFile(sprintf(self::TEST_INPUT_PATTERN, $task->dataDirectory(), $number));
             $expected = rtrim(file_get_contents(sprintf(self::TEST_OUTPUT_PATTERN, $task->dataDirectory(), $number)));
 

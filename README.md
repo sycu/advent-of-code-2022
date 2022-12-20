@@ -9,14 +9,18 @@ composer install
 ## Run tests and get solutions
 You can filter tasks by providing **[FILTER]** argument (regexp)
 ```shell
-php solve.php [FILTER]
+php solve.php [FILTER] [OPTIONS]
 ```
+
+Options:
+- **solutions** - skip tests, just calculate and return solutions. For now only works after FILTER argument, but you can pass an empty string for workaround.
 
 Examples:
 ```shell
 php solve.php
 php solve.php Day5
 php solve.php "Day[0-9]{1,2}B"
+php solve.php "Day[3-6]B" solutions
 ```
 
 Example output:
