@@ -13,6 +13,7 @@
     ],
     "require": {
         "php": ">=8.1",
+        "ext-bcmath": "*",
         "sycu/task-solver-core": "^0.1.2"
     }
 }
