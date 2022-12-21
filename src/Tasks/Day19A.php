@@ -32,7 +32,8 @@ class Day19A extends Task
     protected function findMaxGeodes(int $limit, int $Oo, int $Co, int $Bo, int $Bc, int $Go, int $Gb): int
     {
         // Using array pointer with unset instead of array_shift/array_pop because it is significantly faster for
-        // massive amount of inserts and removals (4 seconds instead of couple of minutes).
+        // massive amount of inserts and removals (4 seconds instead of couple of minutes). SplQueue is quite fast as
+        // well - just 1 second slower.
         $i = 0;
         $queue = [
             [$limit, 1, 0, 0, 0, 0, 0, 0, 0],
