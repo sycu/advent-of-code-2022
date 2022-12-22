@@ -31,9 +31,6 @@ class Day19A extends Task
 
     protected function findMaxGeodes(int $limit, int $Oo, int $Co, int $Bo, int $Bc, int $Go, int $Gb): int
     {
-        // Using array pointer with unset instead of array_shift/array_pop because it is significantly faster for
-        // massive amount of inserts and removals (4 seconds instead of couple of minutes). SplQueue is quite fast as
-        // well - just 1 second slower.
         $i = 0;
         $queue = [
             [$limit, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -46,16 +43,16 @@ class Day19A extends Task
 
         while (isset($queue[$i])) {
             [$limit, $O, $C, $B, $G, $o, $c, $b, $g] = $queue[$i++];
-
-            // We can cut an extra 0.5 second by not unsetting items at the cost of high memory usage
             unset($queue[$i - 1]);
 
-            $limit--;
+            if ($limit < 1) {
+                continue;
+            }
 
             // Reduce number of branches by removing excessive resources, which we can't even spend
-            $o = min($o, $maxOreCost + ($maxOreCost - $O) * $limit);
-            $c = min($c, $Bc + ($Bc - $C) * $limit);
-            $b = min($b, $Gb + ($Gb - $B) * $limit);
+            $o = min($o, $maxOreCost + ($maxOreCost - $O) * ($limit - 1));
+            $c = min($c, $Bc + ($Bc - $C) * ($limit - 1));
+            $b = min($b, $Gb + ($Gb - $B) * ($limit - 1));
 
             $hash = implode('-', [$limit, $O, $C, $B, $G, $o, $c, $b, $g]);
             if (isset($processed[$hash])) {
@@ -63,34 +60,44 @@ class Day19A extends Task
             }
 
             $processed[$hash] = true;
-            $maxGeodes = max($maxGeodes, $g + $G);
-
-            if ($limit === 0) {
-                continue;
-            }
 
             // Geode branch - Buy as much as possible
-            if ($o >= $Go && $b >= $Gb) {
-                $queue[] = [$limit, $O, $C, $B, $G + 1, $o + $O - $Go, $c + $C, $b + $B - $Gb, $g + $G];
+            if ($B > 0) {
+                $timeO = ceil(($Go - $o) / $O);
+                $timeB = ceil(($Gb - $b) / $B);
+                $time = (int) max($timeO, $timeB, 0) + 1;
+
+                $queue[] = [$limit - $time, $O, $C, $B, $G + 1, $o + $time * $O - $Go, $c + $time * $C, $b + $time * $B - $Gb, $g + $time * $G];
             }
 
             // Obsidian branch - We should buy obsidian robots up to geode obsidian cost, we don't need more
-            if ($o >= $Bo && $c >= $Bc && $B < $Gb) {
-                $queue[] = [$limit, $O, $C, $B + 1, $G, $o + $O - $Bo, $c + $C - $Bc, $b + $B, $g + $G];
+            if ($C > 0 && $B < $Gb) {
+                $timeO = ceil(($Bo - $o) / $O);
+                $timeC = ceil(($Bc - $c) / $C);
+                $time = (int) max($timeO, $timeC, 0) + 1;
+
+                $queue[] = [$limit - $time, $O, $C, $B + 1, $G, $o + $time * $O - $Bo, $c + $time * $C - $Bc, $b + $time * $B, $g + $time * $G];
             }
 
             // Clay branch - We should buy clay robots up to obsidian clay cost, we don't need more
-            if ($o >= $Co && $C < $Bc) {
-                $queue[] = [$limit, $O, $C + 1, $B, $G, $o + $O - $Co, $c + $C, $b + $B, $g + $G];
+            if ($C < $Bc) {
+                $timeO = ceil(($Co - $o) / $O);
+                $time = (int) max($timeO, 0) + 1;
+
+                $queue[] = [$limit - $time, $O, $C + 1, $B, $G, $o + $time * $O - $Co, $c + $time * $C, $b + $time * $B, $g + $time * $G];
             }
 
             // Ore branch - We should buy ore robots up to max ore cost, we can't spend more in a turn
-            if ($o >= $Oo && $O < $maxOreCost) {
-                $queue[] = [$limit, $O + 1, $C, $B, $G, $o + $O - $Oo, $c + $C, $b + $B, $g + $G];
+            if ($O < $maxOreCost) {
+                $timeO = ceil(($Oo - $o) / $O);
+                $time = (int) max($timeO, 0) + 1;
+
+                $queue[] = [$limit - $time, $O + 1, $C, $B, $G, $o + $time * $O - $Oo, $c + $time * $C, $b + $time * $B, $g + $time * $G];
             }
 
-            // Noop branch - No purchase at this time, just collecting resources
-            $queue[] = [$limit, $O, $C, $B, $G, $o + $O, $c + $C, $b + $B, $g + $G];
+            // Noop branch - Just collecting resources for the rest of the time
+            $queue[] = [0, $O, $C, $B, $G, $o + $limit * $O, $c + $limit * $C, $b + $limit * $B, $g + $limit * $G];
+            $maxGeodes = max($maxGeodes, $g + $limit * $G);
         }
 
         return $maxGeodes;
