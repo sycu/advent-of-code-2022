@@ -96,7 +96,6 @@ class Day19A extends Task
             }
 
             // Noop branch - Just collecting resources for the rest of the time
-            $queue[] = [0, $O, $C, $B, $G, $o + $limit * $O, $c + $limit * $C, $b + $limit * $B, $g + $limit * $G];
             $maxGeodes = max($maxGeodes, $g + $limit * $G);
         }
 
