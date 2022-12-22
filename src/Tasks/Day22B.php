@@ -40,7 +40,7 @@ class Day22B extends Day22A
                 [$nx, $ny, $ndx, $ndy] = [$ny - 50, 100, 0, 1];
             } elseif ($nx === 49 && 0 <= $ny && $ny < 50 && $ndx === -1) {
                 [$nx, $ny, $ndx, $ndy] = [0, 149 - $ny, 1, $ndy];
-            } elseif ($nx < 0 && 100 <= $ny && $nx < 150 && $ndx === -1) {
+            } elseif ($nx < 0 && 100 <= $ny && $ny < 150 && $ndx === -1) {
                 [$nx, $ny, $ndx, $ndy] = [50, 149 - $ny, 1, $ndy];
             }
         } while (($map[$ny][$nx] ?? ' ') === ' ');
