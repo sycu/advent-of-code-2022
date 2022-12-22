@@ -26,9 +26,9 @@ class Day22A extends Task
                 [$x, $y, $dx, $dy] = $this->nextPosition($x, $y, $dx, $dy, $map);
             }
 
-            $rx = $rotation === 'L' ? -1 : 1;
+            $dr = $rotation === 'L' ? -1 : 1;
             $direction = array_search([$dx, $dy], $directions);
-            $direction = ($direction + $rx + 4) % 4;
+            $direction = ($direction + $dr + 4) % 4;
             [$dx, $dy] = $directions[$direction];
         }
 
