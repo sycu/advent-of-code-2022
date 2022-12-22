@@ -6,6 +6,13 @@ namespace Tasks;
 
 class Day22B extends Day22A
 {
+    /**
+     * Solution only for pattern:
+     * |   | A | B |
+     * |   | C |   |
+     * | D | E |   |
+     * | F |   |   |
+     */
     protected function nextPosition(int $x, int $y, int $dx, int $dy, array $map): array
     {
         [$nx, $ny, $ndx, $ndy] = [$x, $y, $dx, $dy];
