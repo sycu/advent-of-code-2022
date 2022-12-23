@@ -9,7 +9,6 @@ $filter = $argv[1] ?? '';
 $solutionsOnly = ($argv[2] ?? '') === 'solutions';
 
 $config = require 'config.php';
-$tasksLocator = new Solver\TasksLocator($config['namespace'], $config['code_directory']);
-$testsRunner = new Solver\TestsRunner(new Solver\Output\ConsoleOutput(), $tasksLocator, $config['data_directory']);
+$testsRunner = Solver\Runner\TestsRunnerFactory::createFromConfig($config);
 
 $testsRunner->run($filter, $solutionsOnly);

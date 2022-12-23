@@ -14,7 +14,7 @@ if (!$key) {
 }
 
 $config = require 'config.php';
-$generator = new Solver\TaskGenerator($config['namespace'], $config['code_directory'], $config['data_directory']);
+$generator = Solver\Generator\TaskGeneratorFactory::createFromConfig($config);
 
 try {
     $generator->generate($key);
