@@ -6,9 +6,6 @@ namespace Tasks;
 
 class Day19B extends Day19A
 {
-    // All tests take about 9 seconds vs 1 second for solution only.
-    protected const SOLVER_SKIP_TESTS = true;
-
     protected function solve(array $lines): string
     {
         $product = 1;

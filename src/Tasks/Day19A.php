@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tasks;
 
 use Solver\Task;
+use SplQueue;
 
 class Day19A extends Task
 {
@@ -31,19 +32,16 @@ class Day19A extends Task
 
     protected function findMaxGeodes(int $limit, int $Oo, int $Co, int $Bo, int $Bc, int $Go, int $Gb): int
     {
-        $i = 0;
-        $queue = [
-            [$limit, 1, 0, 0, 0, 0, 0, 0, 0],
-        ];
+        $queue = new SplQueue();
+        $queue->push([$limit, 1, 0, 0, 0, 0, 0, 0, 0]);
 
         $processed = [];
         $maxGeodes = 0;
 
         $maxOreCost = max($Oo, $Co, $Bo, $Go);
 
-        while (isset($queue[$i])) {
-            [$limit, $O, $C, $B, $G, $o, $c, $b, $g] = $queue[$i++];
-            unset($queue[$i - 1]);
+        while (!$queue->isEmpty()) {
+            [$limit, $O, $C, $B, $G, $o, $c, $b, $g] = $queue->pop();
 
             if ($limit < 1) {
                 continue;
@@ -67,7 +65,7 @@ class Day19A extends Task
                 $timeB = ceil(($Gb - $b) / $B);
                 $time = (int) max($timeO, $timeB, 0) + 1;
 
-                $queue[] = [$limit - $time, $O, $C, $B, $G + 1, $o + $time * $O - $Go, $c + $time * $C, $b + $time * $B - $Gb, $g + $time * $G];
+                $queue->push([$limit - $time, $O, $C, $B, $G + 1, $o + $time * $O - $Go, $c + $time * $C, $b + $time * $B - $Gb, $g + $time * $G]);
             }
 
             // Obsidian branch - We should buy obsidian robots up to geode obsidian cost, we don't need more
@@ -76,7 +74,7 @@ class Day19A extends Task
                 $timeC = ceil(($Bc - $c) / $C);
                 $time = (int) max($timeO, $timeC, 0) + 1;
 
-                $queue[] = [$limit - $time, $O, $C, $B + 1, $G, $o + $time * $O - $Bo, $c + $time * $C - $Bc, $b + $time * $B, $g + $time * $G];
+                $queue->push([$limit - $time, $O, $C, $B + 1, $G, $o + $time * $O - $Bo, $c + $time * $C - $Bc, $b + $time * $B, $g + $time * $G]);
             }
 
             // Clay branch - We should buy clay robots up to obsidian clay cost, we don't need more
@@ -84,7 +82,7 @@ class Day19A extends Task
                 $timeO = ceil(($Co - $o) / $O);
                 $time = (int) max($timeO, 0) + 1;
 
-                $queue[] = [$limit - $time, $O, $C + 1, $B, $G, $o + $time * $O - $Co, $c + $time * $C, $b + $time * $B, $g + $time * $G];
+                $queue->push([$limit - $time, $O, $C + 1, $B, $G, $o + $time * $O - $Co, $c + $time * $C, $b + $time * $B, $g + $time * $G]);
             }
 
             // Ore branch - We should buy ore robots up to max ore cost, we can't spend more in a turn
@@ -92,7 +90,7 @@ class Day19A extends Task
                 $timeO = ceil(($Oo - $o) / $O);
                 $time = (int) max($timeO, 0) + 1;
 
-                $queue[] = [$limit - $time, $O + 1, $C, $B, $G, $o + $time * $O - $Oo, $c + $time * $C, $b + $time * $B, $g + $time * $G];
+                $queue->push([$limit - $time, $O + 1, $C, $B, $G, $o + $time * $O - $Oo, $c + $time * $C, $b + $time * $B, $g + $time * $G]);
             }
 
             // Noop branch - Just collecting resources for the rest of the time
