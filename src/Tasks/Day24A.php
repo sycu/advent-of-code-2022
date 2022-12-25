@@ -34,16 +34,15 @@ class Day24A extends Task
         $blizzards = [];
         foreach ($lines as $y => $line) {
             for ($x = 0; $x < strlen($line); $x++) {
-                $char = $line[$x];
-                if (in_array($char, array_keys($directions))) {
-                    $blizzards["{$x} {$y}"][] = [$x, $y, ...$directions[$char]];
+                if (in_array($line[$x], array_keys($directions))) {
+                    $blizzards["{$x} {$y}"][] = [$x, $y, ...$directions[$line[$x]]];
                 }
             }
         }
 
         $states = [];
-        $lcm = ($cols - 2) * ($rows - 2) / $this->gcd($cols - 2, $rows - 2);
-        for ($i = 0; $i < $lcm; $i++) {
+        $statesCount = ($cols - 2) * ($rows - 2) / $this->gcd($cols - 2, $rows - 2);
+        for ($i = 0; $i < $statesCount; $i++) {
             $states[] = $blizzards;
             $blizzards = $this->moveBlizzards($blizzards, $cols, $rows);
         }
