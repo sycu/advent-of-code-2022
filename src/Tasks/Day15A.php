@@ -20,10 +20,6 @@ class Day15A extends Task
             preg_match('/x=(.+), y=(.+):.*x=(.+), y=(.+)/', $line, $matches);
             [, $sx, $sy, $bx, $by] = array_map(fn (string $e) => (int) $e, $matches);
 
-            if ($sy === self::ROW) {
-                $row[$sx] = 0;
-            }
-
             if ($by === self::ROW) {
                 $row[$bx] = 0;
             }
